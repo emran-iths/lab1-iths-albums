@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import AlbumListItem from './AlbumListItem'
 
 const AlbumForm = ({onSubmit, id, name}) => {
 
@@ -24,6 +25,7 @@ const AlbumForm = ({onSubmit, id, name}) => {
         
 }
 
+
 export default function Home() {
 
   let default_albums = [
@@ -47,11 +49,7 @@ export default function Home() {
 
         <ul>
         { albums.map(  (album) => {
-            return <li key={album.name}>
-                    {album.id},
-                    {album.name} 
-                    <button onClick={ () => { setView({type:'edit', album: album})} }>Edit</button>
-                </li>
+            return <AlbumListItem key={album.id} {...album} onClick= { () => { setView({type:'edit', album: album})} } /> 
             
         })}
         </ul>
