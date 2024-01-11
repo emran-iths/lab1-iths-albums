@@ -1,19 +1,18 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import AlbumForm from './AlbumForm'
 import AlbumListItem from './AlbumListItem'
 
-
 export default function Home() {
 
-  let default_albums = [
-    {"id":1, "name":"test-album-1", "songs":['song 1','song 2']},
-    {"id":2, "name":"test-album-2", "songs":['song 3']},
-  ];
-
-  const [albums, setAlbums] = useState(default_albums);
+  const [albums, setAlbums] = useState([]);
   const [view, setView] = useState({type:'list'});
 
-  
+  useEffect( () => { 
+    fetch("/api/albums").then( (data) => { data.json().then( (data) => { 
+    setAlbums(data);
+  })});  
+  }, [] )
+
 
   return (
     <>
