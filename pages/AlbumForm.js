@@ -1,6 +1,9 @@
 import React, {useState} from 'react';
+import SongList from './SongList'
 
-const AlbumForm = ({onSubmit, id, name}) => {
+
+
+const AlbumForm = ({onSubmit, id, name, songs}) => {
 
     const [getName, setName] = useState(name);
 
@@ -15,11 +18,14 @@ const AlbumForm = ({onSubmit, id, name}) => {
     };
 
     return (
+        <>
         <form onSubmit={handleSubmit}>
             <b>Id:</b><input type="text" value={id} disabled /><br/>
             <b>Name:</b><input type="text" value={getName} onChange={handleNameChange} /><br/>
             <button type="submit">Submit</button>
         </form>
+        { songs ? <SongList songs={songs}/> : '' }
+        </>
     );
         
 }

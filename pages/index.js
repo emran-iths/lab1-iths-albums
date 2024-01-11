@@ -6,8 +6,8 @@ import AlbumListItem from './AlbumListItem'
 export default function Home() {
 
   let default_albums = [
-    {"id":1, "name":"test-album-1"},
-    {"id":2, "name":"test-album-2"},
+    {"id":1, "name":"test-album-1", "songs":['song 1','song 2']},
+    {"id":2, "name":"test-album-2", "songs":['song 3']},
   ];
 
   const [albums, setAlbums] = useState(default_albums);
