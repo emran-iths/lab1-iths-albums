@@ -36,23 +36,24 @@ export default function Home() {
 
   return (
     <>
-        <button onClick={ () => { setView( view == 'list' ? 'create' : 'list'  )  }  }>switch view</button>
         { view == 'list' ? 
 
-        
+        <>
+        <button onClick={ () => { setView('create')  }  }>Add album</button>
+
         <ul>
         { albums.map(  (album) => {
             return <li key={album.name}>{album.name}</li>
         })}
         </ul>
+        </>
 
+        :  
 
-
-                :  
         <AlbumForm onSubmit={ (data) => {
             console.log("form was submit", data); 
             setAlbums( albums.concat( data));
-
+            setView('list');
         } }/>
 
         }
