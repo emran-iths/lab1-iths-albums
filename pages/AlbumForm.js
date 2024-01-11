@@ -5,7 +5,7 @@ import SongList from './SongList'
 
 const AlbumForm = ({onSubmit, id, name, songs}) => {
 
-    const [getName, setName] = useState(name);
+    const [getName, setName] = useState(name ? name : '');
 
     const handleNameChange = (event) => {
         setName(event.target.value);
