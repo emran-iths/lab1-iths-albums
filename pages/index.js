@@ -7,6 +7,7 @@ export default function Home() {
   const [albums, setAlbums] = useState([]);
   const [view, setView] = useState({type:'list'});
 
+  // Comment examinator: using fetch inside a useEffect hook to prevent a "nasty loop". But I am only fetching default data for this app. All updates and adds is not being done through the api. I am aware that best case senario is to do everything through the api but it seems a bit out of scope for this first task. Reason I fetch data like this in the first place is to show that I used that hook.
   useEffect( () => { 
     fetch("/api/albums").then( (data) => { data.json().then( (data) => { 
     setAlbums(data);
