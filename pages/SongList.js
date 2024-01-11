@@ -1,13 +1,13 @@
 
 import SongListItem from './SongListItem'
 
-const SongList = ({songs}) => {
+const SongList = ({songs, onDelete}) => {
 
 
     return (
         <ul>
         { songs.map( (song) => {
-            return <SongListItem key={song} name={song}/>
+            return <SongListItem key={song} name={song} onDelete={ () => { onDelete(song)} }/>
         })}
         </ul>
     )

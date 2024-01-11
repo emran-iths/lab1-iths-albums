@@ -35,7 +35,7 @@ export default function Home() {
         <>
         <h2>Edit</h2>
         <AlbumForm {...view.album} onSubmit={ (data) => {
-            setAlbums( albums.map( (album) => { return view.album.id == album.id ? {...album, "name": data.name} : album  }  ) )
+            setAlbums( albums.map( (album) => { return view.album.id == album.id ? {...album, "name": data.name, "songs": data.songs} : album  }  ) )
             setView({type:'list'});
         } }/>
         </>

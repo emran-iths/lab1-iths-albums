@@ -3,9 +3,10 @@ import SongList from './SongList'
 
 
 
-const AlbumForm = ({onSubmit, id, name, songs}) => {
+const AlbumForm = ({onSubmit, id, name, songs }) => {
 
-    const [getName, setName] = useState(name ? name : '');
+    const [getName, setName] = useState( name ? name : '' );
+    const [getSongs, setSongs] = useState( songs ? songs : '' );
 
     const handleNameChange = (event) => {
         setName(event.target.value);
@@ -13,7 +14,7 @@ const AlbumForm = ({onSubmit, id, name, songs}) => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        onSubmit({name: getName});
+        onSubmit({name: getName, songs: getSongs});
         setName('');
     };
 
@@ -24,7 +25,9 @@ const AlbumForm = ({onSubmit, id, name, songs}) => {
             <b>Name:</b><input type="text" value={getName} onChange={handleNameChange} /><br/>
             <button type="submit">Submit</button>
         </form>
-        { songs ? <SongList songs={songs}/> : '' }
+        { getSongs ? <SongList songs={getSongs} onDelete={ (song_to_delete) => { 
+		setSongs(getSongs.filter( (song) => { return song != song_to_delete }  ))  
+	}}/> : '' }
         </>
     );
         

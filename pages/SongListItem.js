@@ -1,7 +1,6 @@
-const SongListItem = ({name}) => {
+const SongListItem = ({name, onDelete}) => {
 
-
-    return <li>{name}</li>
+    return <li>{name}<button onClick={onDelete}>Delete</button></li>
 
 }
 
