@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import AlbumForm from './AlbumForm'
-import AlbumListItem from './AlbumListItem'
+import AlbumList from './AlbumList'
 
 export default function Home() {
 
@@ -24,12 +24,8 @@ export default function Home() {
         <h2>List</h2>
         <button onClick={ () => { setView({type:'create'})}  }>Add album</button>
 
-        <ul>
-        { albums.map(  (album) => {
-            return <AlbumListItem key={album.id} {...album} onClick= { () => { setView({type:'edit', album: album})} } /> 
-            
-        })}
-        </ul>
+        <AlbumList onClick={ (album) => { setView({type:'edit', album: album})} } albums={albums}/> 
+
         </>
 
         :
