@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 
-const AlbumForm = ({onSubmit}) => {
+const AlbumForm = ({onSubmit, id, name}) => {
 
-    const [name, setName] = useState('');
+    const [getName, setName] = useState(name);
 
     const handleNameChange = (event) => {
         setName(event.target.value);
@@ -10,13 +10,14 @@ const AlbumForm = ({onSubmit}) => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        onSubmit({name: name});
+        onSubmit({name: getName});
         setName('');
     };
 
     return (
         <form onSubmit={handleSubmit}>
-            <input type="text" value={name} onChange={handleNameChange} />
+            <b>Id:</b><input type="text" value={id} disabled /><br/>
+            <b>Name:</b><input type="text" value={getName} onChange={handleNameChange} /><br/>
             <button type="submit">Submit</button>
         </form>
     );
@@ -26,28 +27,30 @@ const AlbumForm = ({onSubmit}) => {
 export default function Home() {
 
   let default_albums = [
-    {"name":"test-album"}
+    {"id":1, "name":"test-album-1"},
+    {"id":2, "name":"test-album-2"},
   ];
 
   const [albums, setAlbums] = useState(default_albums);
-  const [view, setView] = useState('list');
+  const [view, setView] = useState({type:'list'});
 
   
 
   return (
     <>
-        { view == 'list' ? // Comment examinator: I am aware that there is such as thing as a Switch statement in JS but since the iths document described this way of handling conditional rendering I went with what the documentation said. (I see nothing about what the correct way to do this according the requirement for this task)
+        { view.type == 'list' ? // Comment examinator: I am aware that there is such as thing as a Switch statement in JS but since the iths document described this way of handling conditional rendering I went with what the documentation said. (I see nothing about what the correct way to do this according the requirement for this task)
 
 
         <>
         <h2>List</h2>
-        <button onClick={ () => { setView('create')  }  }>Add album</button>
+        <button onClick={ () => { setView({type:'create'})}  }>Add album</button>
 
         <ul>
         { albums.map(  (album) => {
             return <li key={album.name}>
+                    {album.id},
                     {album.name} 
-                    <button onClick={ () => { setView('edit')} }>Edit</button>
+                    <button onClick={ () => { setView({type:'edit', album: album})} }>Edit</button>
                 </li>
             
         })}
@@ -56,22 +59,25 @@ export default function Home() {
 
         :
 
-        view == 'edit' ? 
+        view.type == 'edit' ? 
 
         <>
         <h2>Edit</h2>
-        <u></u>
+        <AlbumForm {...view.album} onSubmit={ (data) => {
+            setAlbums( albums.map( (album) => { return view.album.id == album.id ? {...album, "name": data.name} : album  }  ) )
+            setView({type:'list'});
+        } }/>
         </>
 
         :  
 
-        view == 'create' ?
+        view.type == 'create' ?
         <>
         <h2>Create</h2>
         <AlbumForm onSubmit={ (data) => {
             console.log("form was submit", data); 
-            setAlbums( albums.concat( data));
-            setView('list');
+            setAlbums( albums.concat( { "id": Math.max(...albums.map( (album) => { return album.id }  ))+1, ...data}));
+            setView({type:'list'});
         } }/>
         </>
 
