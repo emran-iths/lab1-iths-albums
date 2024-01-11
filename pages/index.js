@@ -30,20 +30,32 @@ export default function Home() {
   ];
 
   const [albums, setAlbums] = useState(default_albums);
+  const [view, setView] = useState('list');
+
+  
 
   return (
     <>
-        <AlbumForm onSubmit={ (data) => {
-            console.log("form was submit", data); 
-            setAlbums( albums.concat( data));
+        <button onClick={ () => { setView( view == 'list' ? 'create' : 'list'  )  }  }>switch view</button>
+        { view == 'list' ? 
 
-        } }/>
+        
         <ul>
         { albums.map(  (album) => {
             return <li key={album.name}>{album.name}</li>
         })}
         </ul>
 
+
+
+                :  
+        <AlbumForm onSubmit={ (data) => {
+            console.log("form was submit", data); 
+            setAlbums( albums.concat( data));
+
+        } }/>
+
+        }
 
     </>
   )
