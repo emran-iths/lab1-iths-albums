@@ -57,7 +57,6 @@ export default function Home() {
           <h2>Create</h2>
           <AlbumForm
             onSubmit={(data) => {
-              console.log("form was submit", data);
               setAlbums(
                 albums.concat({
                   id:

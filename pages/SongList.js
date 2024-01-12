@@ -14,8 +14,6 @@ const SongList = ({ songs, onDelete, onAddSubmit }) => {
     setName("");
   };
 
-  console.log(songs);
-
   return (
     <>
       <ul>

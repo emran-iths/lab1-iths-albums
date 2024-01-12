@@ -26,23 +26,20 @@ const AlbumForm = ({ onSubmit, id, name, songs }) => {
         <br />
         <button type="submit">Submit</button>
       </form>
-      {1 ? (
-        <SongList
-          songs={getSongs}
-          onAddSubmit={(data) => {
-            setSongs(getSongs.concat(data.name));
-          }}
-          onDelete={(song_to_delete) => {
-            setSongs(
-              getSongs.filter((song) => {
-                return song != song_to_delete;
-              }),
-            );
-          }}
-        />
-      ) : (
-        ""
-      )}
+
+      <SongList
+        songs={getSongs}
+        onAddSubmit={(data) => {
+          setSongs(getSongs.concat(data.name));
+        }}
+        onDelete={(song_to_delete) => {
+          setSongs(
+            getSongs.filter((song) => {
+              return song != song_to_delete;
+            }),
+          );
+        }}
+      />
     </>
   );
 };
