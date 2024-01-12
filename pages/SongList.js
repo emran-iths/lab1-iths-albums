@@ -16,11 +16,13 @@ const SongList = ({songs, onDelete, onAddSubmit}) => {
         setName('');
     };
 
+    console.log(songs);
+
     return (<>
         <ul>
-        { songs.map( (song) => {
+        { (songs && songs.length>0) ? songs.map( (song) => {
             return <SongListItem key={song} name={song} onDelete={ () => { onDelete(song)} }/>
-        })}
+        }) : <li><i>No songs</i></li> }
         </ul>
         <form onSubmit={handleSubmit}>
         <b>Song name:</b><input type="text" value={getName} onChange={handleNameChange} /><br/>
